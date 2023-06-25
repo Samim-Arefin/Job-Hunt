@@ -15,8 +15,9 @@ class AuthEmail extends Mailable
 
     public $subject;
     public $body;
+    public $email;
 
-    public function __construct($subject,$body)
+    public function __construct($subject, $body)
     {
         $this->subject = $subject;
         $this->body = $body;
@@ -25,7 +26,7 @@ class AuthEmail extends Mailable
     
     public function build()
     {
-        return $this->view('email')->with([
+        return $this->view('email.email')->with([
             'subject' => $this->subject
         ]);
     }
