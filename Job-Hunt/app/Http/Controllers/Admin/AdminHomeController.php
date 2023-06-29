@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\PageHomeItem;
 use Hash;
 use Auth;
 
@@ -57,5 +58,50 @@ class AdminHomeController extends Controller
         $admin->update();
 
         return redirect()->back()->with('success', 'Profile updated successfully!!');
+    }
+
+    public function home_page()
+    {
+        $page_home_data = PageHomeItem::first();
+        return view('admin.home_page', compact('page_home_data'));
+    }
+
+    public function home_page_update(Request $request)
+    {
+        $request->validate([
+            'heading' => 'required',
+            'job_title' => 'required',
+            'job_category' => 'required',
+            'job_location' => 'required',
+            'search' => 'required',
+        ]);
+        
+        $page_home_data = PageHomeItem::first();
+
+        if($request->hasFile('background')) {
+            $request->validate([
+                'background' => 'image|mimes:jpg,jpeg,png,gif'
+            ]);
+
+            unlink(public_path('uploads/'.$page_home_data->background));
+
+            $ext = $request->file('background')->extension();
+            $file_name = 'banner_home'.'.'.$ext;
+
+            $request->file('background')->move(public_path('uploads/'), $file_name);
+
+            $page_home_data->background = $file_name;
+        }
+
+        $page_home_data->heading = $request->heading;
+        $page_home_data->text = $request->text;
+        $page_home_data->job_title = $request->job_title;
+        $page_home_data->job_category = $request->job_category;
+        $page_home_data->job_location = $request->job_location;
+        $page_home_data->search = $request->search;
+
+        $page_home_data->update();
+
+        return redirect()->back()->with('success', 'Search section updated successfully!!');
     }
 }
