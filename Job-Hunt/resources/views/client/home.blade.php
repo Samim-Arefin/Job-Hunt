@@ -70,18 +70,9 @@
                                     <option value="">
                                        {{ $page_home_data->job_category }}
                                     </option>
-                                    <option value="">
-                                       Accounting
-                                    </option>
-                                    <option value="">
-                                       Customer Support
-                                    </option>
-                                    <option value="">
-                                       Web Design
-                                    </option>
-                                    <option value="">
-                                       Web Development
-                                    </option>
+                                    @foreach ($job_categories as $job_category)
+                                        <option value="{{ $job_category->id }}">{{ $job_category->name }}</option>
+                                    @endforeach
                                  </select>
                               </div>
                            </div>
@@ -120,6 +111,7 @@
       </div>
       <div class="row">
          @foreach ($job_categories as $category)
+         @if ( $loop->iteration <= 6)
          <div class="col-md-4">
             <div class="item">
                <div class="icon">
@@ -130,12 +122,13 @@
                <a href=""></a>
             </div>
          </div>
+         @endif
          @endforeach
       </div>
       <div class="row">
          <div class="col-md-12">
             <div class="all">
-               <a href="#" class="btn btn-primary"
+               <a href="{{ route('job-categories') }}" class="btn btn-primary"
                   >See All Categories</a
                   >
             </div>

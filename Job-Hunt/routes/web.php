@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\JobCategoryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+Route::get('/job-categories', [HomeController::class, 'job_categories'])->name('job-categories');
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/login', [AdminController::class, 'index'])->name('admin.login');
