@@ -1,10 +1,10 @@
 @extends('admin.layout.app')
 
-@section('heading', 'Job Categories')
+@section('heading', 'Why Choose Us')
 
 @section('button')
 <div>
-    <a href="{{ route('admin.job-category-create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
+    <a href="{{ route('admin.why-choose-us-create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
 </div>
 @endsection
 
@@ -19,25 +19,27 @@
                             <thead>
                             <tr>
                                 <th class="px-3" style="text-align:center;">SL</th>
-                                <th class="px-3" style="text-align:center;">Category Name</th>
-                                <th class="px-3" style="text-align:center;">Category Icon</th>
+                                <th class="px-3" style="text-align:center;">Icon</th>
                                 <th class="px-3" style="text-align:center;">Icon Preview</th>
+                                <th class="px-3" style="text-align:center;">Heading</th>
+                                <th class="px-3" style="text-align:center;">Text</th>
                                 <th class="px-3" style="text-align:center;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($job_categories as $item)
+                                @foreach($why_choose_items as $item)
                                 <tr>
                                     <td style="text-align:center;">{{ $loop->iteration }}</td>
-                                    <td style="text-align:center;">{{ $item->name }}</td>
                                     <td style="text-align:center;">{{ $item->icon }}</td>
                                     <td style="text-align:center;">
                                         <i class="{{ $item->icon }}"></i>
                                     </td>
+                                    <td style="text-align:center;">{{ $item->heading }}</td>
+                                    <td style="text-align:center;">{{ $item->text }}</td>
                                     <td class="pt_10 pb_10">
                                      <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="{{ route('admin.job-category-edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <form action="{{ route('admin.job-category-delete', $item->id) }}" method="POST">
+                                        <a href="{{ route('admin.why-choose-us-edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <form action="{{ route('admin.why-choose-us-delete', $item->id) }}" method="POST">
                                             @csrf
                                             <button onclick="return confirm('Are you sure?');" type="submit" class="btn btn-danger btn-sm">Delete</button>
                                         </form>

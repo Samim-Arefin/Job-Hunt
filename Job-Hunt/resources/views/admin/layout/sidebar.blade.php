@@ -26,6 +26,9 @@
                     <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i>Job Location</a></li>
                 </ul>
             </li>
+
+            <li class="{{ Request::is('admin/why-choose-us/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.why-choose-us') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Why Choose Us"><i class="fas fa-hand-point-right"></i> <span>Why Choose Us</span></a></li>
+
         </ul>
     </aside>
 </div>

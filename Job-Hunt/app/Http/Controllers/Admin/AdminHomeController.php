@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\PageHomeItem;
-use App\Models\JobCategory;
 use Hash;
 use Auth;
 
@@ -77,6 +76,8 @@ class AdminHomeController extends Controller
             'search' => 'required',
             'job_category_heading' => 'required',
             'job_category_status' => 'required',
+            'why_choose_heading' => 'required',
+            'why_choose_status' => 'required'
         ]);
         
         $page_home_data = PageHomeItem::first();
@@ -96,6 +97,21 @@ class AdminHomeController extends Controller
             $page_home_data->background = $file_name;
         }
 
+        if($request->hasFile('why_choose_background')) {
+            $request->validate([
+                'why_choose_background' => 'image|mimes:jpg,jpeg,png,gif'
+            ]);
+
+            unlink(public_path('uploads/'.$page_home_data->why_choose_background));
+
+            $ext = $request->file('why_choose_background')->extension();
+            $file_name = 'banner3'.'.'.$ext;
+
+            $request->file('why_choose_background')->move(public_path('uploads/'), $file_name);
+
+            $page_home_data->why_choose_background = $file_name;
+        }
+
         $page_home_data->heading = $request->heading;
         $page_home_data->text = $request->text;
         $page_home_data->job_title = $request->job_title;
@@ -106,8 +122,13 @@ class AdminHomeController extends Controller
         $page_home_data->job_category_subheading = $request->job_category_subheading;
         $page_home_data->job_category_status = $request->job_category_status;
 
+        $page_home_data->why_choose_heading = $request->why_choose_heading;
+        $page_home_data->why_choose_subheading = $request->why_choose_subheading;
+        $page_home_data->why_choose_status = $request->why_choose_status;
+
         $page_home_data->update();
 
         return redirect()->back()->with('success', 'Data updated successfully!!');
     }
+    
 }
