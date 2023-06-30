@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         AdminSeeder::class;
         PageHomeSeeder::class;
+        JobCategorySeeder::class;
     }
 }

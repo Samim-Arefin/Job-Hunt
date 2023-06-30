@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\PageHomeItem;
+use App\Models\JobCategory;
 use Hash;
 use Auth;
 
@@ -63,7 +64,7 @@ class AdminHomeController extends Controller
     public function home_page()
     {
         $page_home_data = PageHomeItem::first();
-        return view('admin.home_page', compact('page_home_data'));
+        return view('admin.page-settings.home_page', compact('page_home_data'));
     }
 
     public function home_page_update(Request $request)
@@ -74,6 +75,8 @@ class AdminHomeController extends Controller
             'job_category' => 'required',
             'job_location' => 'required',
             'search' => 'required',
+            'job_category_heading' => 'required',
+            'job_category_status' => 'required',
         ]);
         
         $page_home_data = PageHomeItem::first();
@@ -99,9 +102,12 @@ class AdminHomeController extends Controller
         $page_home_data->job_category = $request->job_category;
         $page_home_data->job_location = $request->job_location;
         $page_home_data->search = $request->search;
+        $page_home_data->job_category_heading = $request->job_category_heading;
+        $page_home_data->job_category_subheading = $request->job_category_subheading;
+        $page_home_data->job_category_status = $request->job_category_status;
 
         $page_home_data->update();
 
-        return redirect()->back()->with('success', 'Search section updated successfully!!');
+        return redirect()->back()->with('success', 'Data updated successfully!!');
     }
 }
