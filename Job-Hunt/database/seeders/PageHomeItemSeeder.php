@@ -23,7 +23,11 @@ class PageHomeItemSeeder extends Seeder
             'background' => 'job-search.jpg',
             'job_category_heading' => 'Job Categories',
             'job_category_subheading' => 'Get the list of all the popular job categories here',
-            'job_category_status' => 'Show'
+            'job_category_status' => 'Show',
+            'why_choose_heading' => 'Why Choose Us',
+            'why_choose_subheading' => 'Our Methods to help you build your career in future',
+            'why_choose_background' => 'banner3.jpg',
+            'why_choose_status' => 'Show'
         ]);
     }
 }

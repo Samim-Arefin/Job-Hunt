@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PageHomeItem;
 use App\Models\JobCategory;
+use App\Models\WhyChooseItem;
 
 class HomeController extends Controller
 {
@@ -13,8 +14,9 @@ class HomeController extends Controller
     {
         $page_home_data = PageHomeItem::first();
         $job_categories = JobCategory::orderBy('name', 'asc')->get();
+        $why_choose_items = WhyChooseItem::all();
         
-        return view('client.home', compact('page_home_data','job_categories'));
+        return view('client.home', compact('page_home_data','job_categories', 'why_choose_items'));
     }
     
     public function job_categories()

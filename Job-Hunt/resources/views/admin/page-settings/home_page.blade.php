@@ -103,7 +103,7 @@
                                         <!-- Search Section End -->
                                     </div>
 
-                                    <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+                                    <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab" tabindex="1">
                                         <!-- Job Category Section Start -->
                                         <div class="row">
                                             <div class="col-md-12">
@@ -137,7 +137,48 @@
                                         <!-- Job Category Section End -->
                                     </div>
 
-                                  <!--Why Choose Us-->
+                                  <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab" tabindex="2">
+                                        <!-- Why Choose Section Start -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Heading *</label>
+                                                    <input type="text" class="form-control  @error('why_choose_heading') is-invalid @enderror" name="why_choose_heading" value="{{ $page_home_data->why_choose_heading }}">
+                                                    @error('why_choose_heading')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                     @enderror
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Sub Heading</label>
+                                                    <input type="text" class="form-control" name="why_choose_subheading" value="{{ $page_home_data->why_choose_subheading }}">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Existing Background *</label>
+                                                    <div>
+                                                        <img src="{{ asset('uploads/'.$page_home_data->why_choose_background) }}" alt="" class="w_300">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Change Background *</label>
+                                                    <div>
+                                                        <input type="file" class="form-control mt_10" name="why_choose_background">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Status *</label>
+                                                    <select name="why_choose_status" class="form-control @error('why_choose_status') is-invalid @enderror">
+                                                        <option value="Show" @if($page_home_data->why_choose_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data->why_choose_status == 'Hide') selected @endif>Hide</option>
+                                                    </select>
+                                                    @error('why_choose_status')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                     @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Why Choose Section End -->
+                                    </div>
+
                                   <!--Featured Jobs-->
                                   <!--Testimonial-->
                                   <!--SEO Section-->
