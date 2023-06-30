@@ -179,7 +179,37 @@
                                         <!-- Why Choose Section End -->
                                     </div>
 
-                                  <!--Featured Jobs-->
+                                   <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab" tabindex="3">
+                                        <!-- Featured Jobs Section Start -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Heading *</label>
+                                                    <input type="text" class="form-control @error('featured_jobs_heading') is-invalid @enderror" name="featured_jobs_heading" value="{{ $page_home_data->featured_jobs_heading }}">
+                                                    @error('featured_jobs_heading')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Sub Heading</label>
+                                                    <input type="text" class="form-control" name="featured_jobs_subheading" value="{{ $page_home_data->featured_jobs_subheading }}">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Status *</label>
+                                                    <select name="featured_jobs_status" class="form-control @error('featured_jobs_status') is-invalid @enderror">
+                                                        <option value="Show" @if($page_home_data->featured_jobs_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data->featured_jobs_status == 'Hide') selected @endif>Hide</option>
+                                                    </select>
+                                                    @error('featured_jobs_status')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Featured Jobs Section End -->
+                                    </div>
+
+
                                   <!--Testimonial-->
                                   <!--SEO Section-->
                                   
