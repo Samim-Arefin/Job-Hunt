@@ -27,7 +27,10 @@ class PageHomeItemSeeder extends Seeder
             'why_choose_heading' => 'Why Choose Us',
             'why_choose_subheading' => 'Our Methods to help you build your career in future',
             'why_choose_background' => 'banner3.jpg',
-            'why_choose_status' => 'Show'
+            'why_choose_status' => 'Show',
+            'featured_jobs_heading' => 'Featured Jobs',
+            'featured_jobs_subheading' => 'Find the awesome jobs that matches your skill',
+            'featured_jobs_status' => 'Show'
         ]);
     }
 }

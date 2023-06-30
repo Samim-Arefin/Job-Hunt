@@ -77,7 +77,9 @@ class AdminHomeController extends Controller
             'job_category_heading' => 'required',
             'job_category_status' => 'required',
             'why_choose_heading' => 'required',
-            'why_choose_status' => 'required'
+            'why_choose_status' => 'required',
+            'featured_jobs_heading' => 'required',
+            'featured_jobs_status' => 'required'
         ]);
         
         $page_home_data = PageHomeItem::first();
@@ -125,6 +127,10 @@ class AdminHomeController extends Controller
         $page_home_data->why_choose_heading = $request->why_choose_heading;
         $page_home_data->why_choose_subheading = $request->why_choose_subheading;
         $page_home_data->why_choose_status = $request->why_choose_status;
+
+        $page_home_data->featured_jobs_heading = $request->featured_jobs_heading;
+        $page_home_data->featured_jobs_subheading = $request->featured_jobs_subheading;
+        $page_home_data->featured_jobs_status = $request->featured_jobs_status;
 
         $page_home_data->update();
 
