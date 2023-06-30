@@ -20,7 +20,10 @@ class PageHomeItemSeeder extends Seeder
             'job_category' => 'Job Category',
             'job_location' => 'Job Location',
             'search' => 'Search',
-            'background' => 'job-search.jpg'
+            'background' => 'job-search.jpg',
+            'job_category_heading' => 'Job Categories',
+            'job_category_subheading' => 'Get the list of all the popular job categories here',
+            'job_category_status' => 'Show'
         ]);
     }
 }

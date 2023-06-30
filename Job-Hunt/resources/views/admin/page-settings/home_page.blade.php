@@ -8,6 +8,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <form action="{{ route('admin.home-page-update') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                         <div class="row custom-tab">
                             <div class="col-lg-3 col-md-12">
                                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical"> 
@@ -30,8 +32,6 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                 
                                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
-                                    <form action="{{ route('admin.home-page-update') }}" method="post" enctype="multipart/form-data">
-                                    @csrf
                                         <!-- Search Section Start -->
                                         <div class="row">
                                             <div class="col-md-12">
@@ -98,17 +98,45 @@
                                                         <input type="file" class="form-control mt_10" name="background">
                                                     </div>
                                                 </div>
-                                                <div class="mb-4">
-                                                   <label class="form-label"></label>
-                                                   <button type="submit" class="btn btn-primary">Update</button>
-                                                </div>
                                             </div>
                                         </div>
-                                    </form>
                                         <!-- Search Section End -->
                                     </div>
 
-                                  <!--Job Category-->
+                                    <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+                                        <!-- Job Category Section Start -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Heading *</label>
+                                                    <input type="text" class="form-control @error('job_category_heading') is-invalid @enderror" name="job_category_heading" value="{{ $page_home_data->job_category_heading }}">
+                                                     @error('job_category_heading')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                     @enderror
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Sub Heading</label>
+                                                    <textarea name="job_category_subheading" class="form-control h_100" cols="30" rows="10">{{ $page_home_data->job_category_subheading}}</textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="mb-4">
+                                                            <label class="form-label">Status *</label>
+                                                            <select name="job_category_status" class="form-control @error('job_category_status') is-invalid @enderror">
+                                                            <option value="Show" @if($page_home_data->job_category_status == 'Show') selected @endif>Show</option>
+                                                            <option value="Hide" @if($page_home_data->job_category_status == 'Hide') selected @endif>Hide</option>
+                                                            </select>
+                                                             @error('job_category_status')
+                                                              <div class="invalid-feedback">{{ $message }}</div>
+                                                             @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Job Category Section End -->
+                                    </div>
+
                                   <!--Why Choose Us-->
                                   <!--Featured Jobs-->
                                   <!--Testimonial-->
@@ -116,10 +144,14 @@
                                   
                                 </div>
 
-                                <!--Button-->
+                                <div class="mb-4">
+                                    <label class="form-label"></label>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
                             </div>
 
                         </div>
+                     </form>
                 </div>
             </div>
         </div>
