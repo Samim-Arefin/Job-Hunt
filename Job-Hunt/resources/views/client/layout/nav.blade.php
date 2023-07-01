@@ -23,10 +23,10 @@
                   <li class="nav-item">
                      <a href="#" class="nav-link">Companies</a>
                   </li>
-                  <li class="nav-item">
-                     <a href="#" class="nav-link">Pricing</a>
+                  <li class="nav-item {{ Request::is('pricing') ? 'active' : '' }}">
+                     <a href="{{ route('pricing') }}" class="nav-link">Pricing</a>
                   </li>
-                  <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                  <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
                      <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                   </li>
                </ul>
