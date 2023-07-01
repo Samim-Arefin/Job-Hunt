@@ -210,7 +210,37 @@
                                     </div>
 
 
-                                  <!--Testimonial-->
+                                  <div class="tab-pane fade" id="v-pills-5" role="tabpanel" aria-labelledby="v-pills-5-tab" tabindex="4">
+                                        <!-- Testimonial Section Start -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Existing Background *</label>
+                                                    <div>
+                                                        <img src="{{ asset('uploads/'.$page_home_data->testimonial_background) }}" alt="" class="w_300">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Change Background *</label>
+                                                    <div>
+                                                        <input type="file" class="form-control mt_10" name="testimonial_background">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Status *</label>
+                                                    <select name="testimonial_status" class="form-control @error('testimonial_status') is-invalid @enderror">
+                                                        <option value="Show" @if($page_home_data->testimonial_status == 'Show') selected @endif>Show</option>
+                                                        <option value="Hide" @if($page_home_data->testimonial_status == 'Hide') selected @endif>Hide</option>
+                                                    </select>
+                                                    @error('testimonial_status')
+                                                      <div class="invalid-feedback">{{ $message }}</div>
+                                                     @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Testimonial Section End -->
+                                    </div>
+
                                   <!--SEO Section-->
                                   
                                 </div>

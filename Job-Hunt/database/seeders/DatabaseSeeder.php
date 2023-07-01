@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         PageHomeSeeder::class;
         JobCategorySeeder::class;
         WhyChooseItemSeeder::class;
+        TestimonialSeeder::class;
     }
 }
