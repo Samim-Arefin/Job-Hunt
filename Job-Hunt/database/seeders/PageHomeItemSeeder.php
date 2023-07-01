@@ -30,7 +30,9 @@ class PageHomeItemSeeder extends Seeder
             'why_choose_status' => 'Show',
             'featured_jobs_heading' => 'Featured Jobs',
             'featured_jobs_subheading' => 'Find the awesome jobs that matches your skill',
-            'featured_jobs_status' => 'Show'
+            'featured_jobs_status' => 'Show',
+            'testimonial_background' => 'banner11.jpg',
+            'testimonial_status' => 'Show'
         ]);
     }
 }

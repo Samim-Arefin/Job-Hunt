@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\WhyChooseController;
+use App\Http\Controllers\Admin\TestimonialController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
@@ -41,5 +42,12 @@ Route::middleware(['admin:admin'])->group(function(){
     Route::get('/admin/why-choose-us/edit/{id}', [WhyChooseController::class, 'edit'])->name('admin.why-choose-us-edit');
     Route::post('/admin/why-choose-us/update/{id}', [WhyChooseController::class, 'update'])->name('admin.why-choose-us-update');
     Route::post('/admin/why-choose-us/delete/{id}', [WhyChooseController::class, 'delete'])->name('admin.why-choose-us-delete');
+
+    Route::get('/admin/testimonial/view', [TestimonialController::class, 'index'])->name('admin.testimonial');
+    Route::get('/admin/testimonial/create', [TestimonialController::class, 'create'])->name('admin.testimonial-create');
+    Route::post('/admin/testimonial/store', [TestimonialController::class, 'store'])->name('admin.testimonial-store');
+    Route::get('/admin/testimonial/edit/{id}', [TestimonialController::class, 'edit'])->name('admin.testimonial-edit');
+    Route::post('/admin/testimonial/update/{id}', [TestimonialController::class, 'update'])->name('admin.testimonial-update');
+    Route::post('/admin/testimonial/delete/{id}', [TestimonialController::class, 'delete'])->name('admin.testimonial-delete');
 
 });
