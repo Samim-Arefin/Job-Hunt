@@ -8,6 +8,8 @@ use App\Models\PageHomeItem;
 use App\Models\JobCategory;
 use App\Models\WhyChooseItem;
 use App\Models\Testimonial;
+use App\Models\PageTermItem;
+use App\Models\PagePrivacyItem;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,13 @@ class HomeController extends Controller
 
     public function terms()
     {
-        return view('client.terms');
+        $page_term_data = PageTermItem::first();
+        return view('client.terms', compact('page_term_data'));
+    }
+
+    public function privacy()
+    {
+        $page_privacy_data = PagePrivacyItem::first();
+        return view('client.privacy', compact('page_privacy_data'));
     }
 }

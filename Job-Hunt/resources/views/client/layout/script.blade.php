@@ -9,3 +9,4 @@
 <script src="{{ asset('/client/js/moment.min.js') }}"></script>
 <script src="{{ asset('/client/js/jquery.meanmenu.js') }}"></script>
 <script src="{{ asset('/client/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('/client/js/iziToast.min.js') }}"></script>

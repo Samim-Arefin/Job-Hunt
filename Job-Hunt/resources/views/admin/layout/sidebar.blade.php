@@ -11,11 +11,13 @@
 
             <li class="{{ Request::is('admin/index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Dashboard"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
 
-            <li class="nav-item dropdown {{ Request::is('admin/home-page') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('admin/home-page') || Request::is('admin/term-page') || Request::is('admin/privacy-page') ||  Request::is('admin/contact-page') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Page Settings</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('admin/home-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.home-page') }}"><i class="fas fa-angle-right"></i>Home</a></li>
-                    <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i>Terms</a></li>
+                    <li class="{{ Request::is('admin/home-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.home-page') }}"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li class="{{ Request::is('admin/term-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.term-page') }}"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
+                    <li class="{{ Request::is('admin/privacy-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.privacy-page') }}"><i class="fas fa-angle-right"></i> Privacy & Policy</a></li>
+                    <li class="{{ Request::is('admin/contact-page') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.contact-page') }}"><i class="fas fa-angle-right"></i>Contact</a></li>
                 </ul>
             </li>
 
