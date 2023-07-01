@@ -3,13 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\WhyChooseController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\TermPageController;
+use App\Http\Controllers\Admin\PrivacyPageController;
+use App\Http\Controllers\Admin\ContactPageController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ContactController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact-submit');
 Route::get('/job-categories', [HomeController::class, 'job_categories'])->name('job-categories');
 
 Route::group(['prefix' => 'admin'], function(){
@@ -49,5 +56,14 @@ Route::middleware(['admin:admin'])->group(function(){
     Route::get('/admin/testimonial/edit/{id}', [TestimonialController::class, 'edit'])->name('admin.testimonial-edit');
     Route::post('/admin/testimonial/update/{id}', [TestimonialController::class, 'update'])->name('admin.testimonial-update');
     Route::post('/admin/testimonial/delete/{id}', [TestimonialController::class, 'delete'])->name('admin.testimonial-delete');
+
+    Route::get('/admin/term-page', [TermPageController::class, 'index'])->name('admin.term-page');
+    Route::post('/admin/term-page/update', [TermPageController::class, 'update'])->name('admin.term-page-update');
+
+    Route::get('/admin/privacy-page', [PrivacyPageController::class, 'index'])->name('admin.privacy-page');
+    Route::post('/admin/privacy-page/update', [PrivacyPageController::class, 'update'])->name('admin.privacy-page-update');
+
+    Route::get('/admin/contact-page', [ContactPageController::class, 'index'])->name('admin.contact-page');
+    Route::post('/admin/contact-page/update', [ContactPageController::class, 'update'])->name('admin.contact-page-update');
 
 });

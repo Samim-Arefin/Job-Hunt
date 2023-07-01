@@ -169,7 +169,7 @@
                             <ul>
                                 <li><a href="{{ route('terms') }}">Terms of Use</a></li>
                                 <li>
-                                    <a href="#">Privacy Policy</a>
+                                    <a href="{{ route('privacy') }}">Privacy Policy</a>
                                 </li>
                             </ul>
                         </div>

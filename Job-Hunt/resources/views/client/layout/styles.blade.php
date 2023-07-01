@@ -9,3 +9,4 @@
 <link rel="stylesheet" href="{{ asset('/client/css/meanmenu.css')}}" />
 <link rel="stylesheet" href="{{ asset('/client/css/spacing.css')}}" />
 <link rel="stylesheet" href="{{ asset('/client/css/style.css')}}" />
+<link rel="stylesheet" href="{{ asset('/client/css/iziToast.min.css') }}">

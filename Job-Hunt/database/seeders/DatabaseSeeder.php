@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         JobCategorySeeder::class;
         WhyChooseItemSeeder::class;
         TestimonialSeeder::class;
+        TermPageSeeder::class;
+        PrivacyPageSeeder::class;
+        ContactPageSeeder::class;
     }
 }

@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="font-size: 50px;">
                     <form action="{{ route('admin.testimonial-store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-3">
