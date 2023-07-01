@@ -10,6 +10,8 @@ use App\Models\WhyChooseItem;
 use App\Models\Testimonial;
 use App\Models\PageTermItem;
 use App\Models\PagePrivacyItem;
+use App\Models\Package;
+
 
 class HomeController extends Controller
 {
@@ -40,5 +42,12 @@ class HomeController extends Controller
     {
         $page_privacy_data = PagePrivacyItem::first();
         return view('client.privacy', compact('page_privacy_data'));
+    }
+
+    public function pricing()
+    {
+          $packages = Package::all();
+
+          return view('client.pricing', compact('packages'));
     }
 }

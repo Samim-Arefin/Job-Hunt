@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TermPageController;
 use App\Http\Controllers\Admin\PrivacyPageController;
 use App\Http\Controllers\Admin\ContactPageController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ContactController;
 
@@ -17,6 +18,7 @@ Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact-submit');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
 Route::get('/job-categories', [HomeController::class, 'job_categories'])->name('job-categories');
 
 Route::group(['prefix' => 'admin'], function(){
@@ -65,5 +67,12 @@ Route::middleware(['admin:admin'])->group(function(){
 
     Route::get('/admin/contact-page', [ContactPageController::class, 'index'])->name('admin.contact-page');
     Route::post('/admin/contact-page/update', [ContactPageController::class, 'update'])->name('admin.contact-page-update');
+
+    Route::get('/admin/package/view', [PackageController::class, 'index'])->name('admin.package');
+    Route::get('/admin/package/create', [PackageController::class, 'create'])->name('admin.package-create');
+    Route::post('/admin/package/store', [PackageController::class, 'store'])->name('admin.package-store');
+    Route::get('/admin/package/edit/{id}', [PackageController::class, 'edit'])->name('admin.package-edit');
+    Route::post('/admin/package/update/{id}', [PackageController::class, 'update'])->name('admin.package-update');
+    Route::post('/admin/package/delete/{id}', [PackageController::class, 'delete'])->name('admin.package-delete');
 
 });

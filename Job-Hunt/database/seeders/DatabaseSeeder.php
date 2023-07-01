@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         TermPageSeeder::class;
         PrivacyPageSeeder::class;
         ContactPageSeeder::class;
+        PackageSeeder::class;
     }
 }
