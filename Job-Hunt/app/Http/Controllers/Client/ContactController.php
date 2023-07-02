@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PageContactItem;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\AuthEmail;
 use App\Models\Admin;
 
@@ -32,8 +33,8 @@ class ContactController extends Controller
         $message .= 'Email: '.$request->email.'<br>';
         $message .= 'Message: '.$request->message;
 
-        \Mail::to($admin->email)->send(new AuthEmail($subject, $message));
+        Mail::to($admin->email)->send(new AuthEmail($subject, $message));
 
-        return redirect()->back()->with('success', 'Email sent successfully!');
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }

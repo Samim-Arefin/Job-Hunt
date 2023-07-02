@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\AuthEmail;
 use App\Models\Admin;
 use Hash;
@@ -78,7 +79,7 @@ class AdminController extends Controller
         $subject = 'Reset Your Password';
         $message = 'In order to change password: <br> <a href="'.$reset_link.'">Click Here</a>';
 
-        \Mail::to($request->email)->send(new AuthEmail($subject, $message));
+        Mail::to($request->email)->send(new AuthEmail($subject, $message));
 
         $email = $request->email;
 
