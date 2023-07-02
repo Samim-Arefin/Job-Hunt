@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         Admin::create([
             'name' => 'admin',
-            'email' => 'admin@jobhunt.com',
+            'email' => 'jobhunt.web@gmail.com',
             'password' => Hash::make('admin123'),
             'photo' => 'admin.jpg',
             'token' => '',

@@ -23,21 +23,44 @@
                 <div class="row">
                     <div class="col-md-6 left-side">
                         <ul>
-                            <li class="email-text">admin@jobhunt.com</li>
+                            <li class="email-text">jobhunt.web@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-md-6 right-side">
+                        
                         <ul class="right">
-                            <li class="menu">
-                                <a href="#"
-                                    ><i class="fas fa-sign-in-alt"></i> Login</a
-                                >
+                            @if ((!Auth::guard('company')->check()) && (!Auth::guard('user')->check()))
+                                <li class="menu nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> Sign Up</a>
+                                <div class="dropdown-menu">
+                                   <a class="dropdown-item" style="color:darkcyan;" href="{{ route('auth.user-signup') }}">User Sign Up</a>
+                                <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" style="color:darkcyan;" href="{{ route('auth.company-signup') }}">Company Sign Up</a>
+                                </div>
                             </li>
-                            <li class="#">
-                                <a href="#"
-                                    ><i class="fas fa-user"></i> Sign Up</a
-                                >
+                            <li class="menu nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sign-in-alt"></i> Login</a>
+                                <div class="dropdown-menu">
+                                   <a class="dropdown-item" style="color:darkcyan;" href="{{ route('auth.user-login') }}">User Login</a>
+                                <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" style="color:darkcyan;" href="{{ route('auth.company-login') }}">Company Login</a>
+                                </div>
                             </li>
+                            @else
+                              @if (Auth::guard('company')->check())
+                                <li class="menu">
+                                    <a href="{{ route('company.dashboard') }}">
+                                     <i class="fas fa-home"></i> Dashboard
+                                    </a>
+                                </li>
+                              @else
+                                <li class="menu">
+                                    <a href="{{ route('user.dashboard') }}">
+                                     <i class="fas fa-home"></i> Dashboard
+                                    </a>
+                                </li>
+                              @endif
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -95,7 +118,7 @@
                                 <div class="left">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <div class="right">admin@jobhunt.com</div>
+                                <div class="right">jobhunt.web@gmail.com</div>
                             </div>
                             <ul class="social">
                                 <li>
