@@ -16,7 +16,7 @@ class PackageSeeder extends Seeder
         $packages = [
            [
                'name' => 'Basic',
-               'price' => 19,
+               'price' => 500,
                'days' => 14,
                'time' => '2 Week',
                'total_allowed_jobs' => 10,
@@ -26,7 +26,7 @@ class PackageSeeder extends Seeder
            ],
            [
                'name' => 'Standard',
-               'price' => 39,
+               'price' => 1500,
                'days' => 30,
                'time' => '1 Month',
                'total_allowed_jobs' => 25,
@@ -36,7 +36,7 @@ class PackageSeeder extends Seeder
            ],
            [
                'name' => 'Premium',
-               'price' => 59,
+               'price' => 3000,
                'days' => 60,
                'time' => '2 Month',
                'total_allowed_jobs' => 50,
