@@ -15,6 +15,7 @@ use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\CompanyController;
 use App\Http\Controllers\Client\UserController;
+use App\Http\Controllers\SslCommerzPaymentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
@@ -56,6 +57,9 @@ Route::group(['prefix' => 'auth'], function(){
 
 Route::middleware(['company:company'])->group(function(){
     Route::get('/company/dashboard', [CompanyController::class, 'index'])->name('company.dashboard');
+    Route::get('/buy-package/{package}',[CompanyController::class, 'package'])->name('buy-package');
+    Route::get('/company/current-plan',[CompanyController::class, 'current_plan'])->name('company.current-plan');
+    Route::post('/company/cancel-plan/{id}',[CompanyController::class, 'cancel_plan'])->name('company.cancel-plan');
 });
 
 Route::middleware(['user:user'])->group(function(){
@@ -117,3 +121,9 @@ Route::middleware(['admin:admin'])->group(function(){
     Route::post('/admin/package/delete/{id}', [PackageController::class, 'delete'])->name('admin.package-delete');
 
 });
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);

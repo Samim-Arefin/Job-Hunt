@@ -29,7 +29,7 @@
                                 <tr>
                                     <td style="text-align:center;">{{ $loop->iteration }}</td>
                                     <td style="text-align:center;">{{ $item->name }}</td>
-                                    <td style="text-align:center;">{{ $item->price }} $</td>
+                                    <td style="text-align:center;">{{ $item->price }} ৳</td>
                                     <td class="pt_10 pb_10">
                                      <div class="d-flex justify-content-center align-items-center gap-2">
                                         <a href="{{ route('admin.package-edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>

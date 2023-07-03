@@ -1,3 +1,4 @@
+@inject('convert', Rakibhstu\Banglanumber\NumberToBangla::class)
 @extends('client.layout.app')
 @section('title', 'Packages')
 
@@ -21,7 +22,12 @@
                 <div class="card mb-5 mb-lg-0">
                     <div class="card-body">
                         <h2 class="card-title">{{ $package->name }}</h2>
-                        <h3 class="card-price">${{ $package->price }}</h3>
+                        <h3 class="card-price">
+                         @php
+                         $text = $convert->bnNum($package->price);
+                         @endphp 
+                         {{ $text }}৳
+                        </h3>
                         <h4 class="card-day">({{ $package->time }})</h4>
                         <hr />
                         <ul class="fa-ul">
@@ -79,7 +85,7 @@
                             </li>
                         </ul>
                         <div class="buy">
-                            <a href="#" class="btn btn-primary">Choose Plan</a>
+                            <a href ="{{ route('buy-package', $package) }}" class="btn btn-primary">Choose Plan</a>
                         </div>
                     </div>
                 </div>
