@@ -12,6 +12,22 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        $company = Auth::guard('company')->user();
+        $current_plan = Order::where('company_id', $company->id)->where('currently_active', 1)->first();
+        
+        if($current_plan != null)
+        {
+             $currentDate = date_create(date('Y-m-d'));
+             $targetDate = date_create($current_plan->ending_date);
+             $diff = date_diff($currentDate, $targetDate);
+             $remainingDays = $diff->format("%a");
+
+             if($remainingDays == '0')
+             {
+                  $current_plan->delete();
+             }
+        }
+        
         return view('client.company.dashboard');
     }
 

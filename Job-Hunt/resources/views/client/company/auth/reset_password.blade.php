@@ -1,5 +1,5 @@
 @extends('client.layout.app') 
-@section('title', 'Reset Password') 
+@section('title', 'Company Reset Password') 
 @section('main-section')
 <div class="page-top" style="background-image: url('{{ asset('uploads/banner.jpg') }}')">
     <div class="bg"></div>
