@@ -1,5 +1,5 @@
 @extends('client.layout.app') 
-@section('title', 'Sign Up') 
+@section('title', 'Company Sign Up') 
 @section('main-section')
 <div class="page-top" style="background-image: url('{{ asset('uploads/banner.jpg') }}')">
     <div class="bg"></div>

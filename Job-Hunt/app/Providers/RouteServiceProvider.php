@@ -35,6 +35,41 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->prefix('admin')
+                ->group(base_path('routes/admin.php'));
+
+            Route::middleware(['web', 'admin:admin'])
+                ->prefix('admin')
+                ->group(base_path('routes/adminhome.php'));
+
+            Route::middleware(['web', 'admin:admin'])
+                ->prefix('admin')
+                ->group(base_path('routes/homepagesection.php'));
+
+            Route::middleware(['web', 'admin:admin'])
+                ->prefix('admin')
+                ->group(base_path('routes/jobsection.php'));
+
+            Route::middleware(['web', 'admin:admin'])
+                ->prefix('admin')
+                ->group(base_path('routes/package.php'));
+
+             Route::middleware('web')
+                ->group(base_path('routes/homepage.php'));
+
+            Route::middleware('web')
+                ->prefix('auth')
+                ->group(base_path('routes/auth.php'));
+
+            Route::middleware(['web', 'company:company'])
+                ->prefix('company')
+                ->group(base_path('routes/company.php'));
+
+            Route::middleware(['web', 'user:user'])
+                ->prefix('user')
+                ->group(base_path('routes/user.php'));
         });
     }
 }

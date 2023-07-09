@@ -19,8 +19,8 @@
                             <thead>
                             <tr>
                                 <th class="px-3" style="text-align:center;">SL</th>
-                                <th class="px-3" style="text-align:center;">Category Name</th>
-                                <th class="px-3" style="text-align:center;">Category Icon</th>
+                                <th class="px-3" style="text-align:center;">Job Category</th>
+                                <th class="px-3" style="text-align:center;">Job Category Icon</th>
                                 <th class="px-3" style="text-align:center;">Icon Preview</th>
                                 <th class="px-3" style="text-align:center;">Action</th>
                             </tr>

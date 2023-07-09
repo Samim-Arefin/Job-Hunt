@@ -14,12 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         AdminSeeder::class;
         PageHomeSeeder::class;
-        JobCategorySeeder::class;
         WhyChooseItemSeeder::class;
         TestimonialSeeder::class;
         TermPageSeeder::class;
         PrivacyPageSeeder::class;
         ContactPageSeeder::class;
         PackageSeeder::class;
+        JobTypeSeeder::class;
+        JobLocationSeeder::class;
+        JobCategorySeeder::class;
+        JobExperienceSeeder::class;
+        JobGenderSeeder::class;
+        JobSalaryRangeSeeder::class;
+        CompanyLocationSeeder::class;
+        CompanyIndustrySeeder::class;
+        CompanySizeSeeder::class;
     }
 }
