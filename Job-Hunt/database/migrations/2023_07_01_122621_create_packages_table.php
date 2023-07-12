@@ -20,7 +20,6 @@ return new class extends Migration
             $table->tinyInteger('total_allowed_jobs');
             $table->tinyInteger('total_allowed_featured_jobs');
             $table->tinyInteger('total_allowed_photos');
-            $table->tinyInteger('total_allowed_videos');
             $table->timestamps();
         });
     }

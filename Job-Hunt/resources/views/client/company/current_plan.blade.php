@@ -70,11 +70,10 @@
 
 @if(session()->get('error'))
     <script>
-        iziToast.success({
+        iziToast.error({
             title: '',
             position: 'topRight',
             message: '{{ session()->get('error') }}',
-            backgroundColor: '#ff0033',
         });
     </script>
 @endif

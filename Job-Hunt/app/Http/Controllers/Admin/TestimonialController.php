@@ -69,7 +69,7 @@ class TestimonialController extends Controller
             unlink(public_path('uploads/'.$testimonial->photo));
 
             $ext = $request->file('photo')->extension();
-            $file_name = 'banner3'.'.'.$ext;
+            $file_name = 'testimonial'.'.'.$ext;
 
             $request->file('photo')->move(public_path('uploads/'), $file_name);
 
@@ -88,6 +88,7 @@ class TestimonialController extends Controller
     public function delete($id)
     {
           $testimonial  = Testimonial::find($id);
+          unlink(public_path('uploads/'.$testimonial->photo));
           $testimonial ->delete();
 
           return redirect()->route('admin.testimonial')->with('success', 'Deleted successfully!!');

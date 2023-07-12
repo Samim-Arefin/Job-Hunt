@@ -30,7 +30,6 @@ class PackageController extends Controller
             'total_allowed_jobs' => 'required',
             'total_allowed_featured_jobs' => 'required',
             'total_allowed_photos' => 'required',
-            'total_allowed_videos' => 'required',
           ]);
          
           $package = new Package();
@@ -41,7 +40,6 @@ class PackageController extends Controller
           $package->total_allowed_jobs = $request->total_allowed_jobs;
           $package->total_allowed_featured_jobs = $request->total_allowed_featured_jobs;
           $package->total_allowed_photos = $request->total_allowed_photos;
-          $package->total_allowed_videos = $request->total_allowed_videos;
 
           $package->save();
 
@@ -64,7 +62,6 @@ class PackageController extends Controller
             'total_allowed_jobs' => 'required',
             'total_allowed_featured_jobs' => 'required',
             'total_allowed_photos' => 'required',
-            'total_allowed_videos' => 'required',
           ]);
          
           $package = Package::find($id);
@@ -75,8 +72,6 @@ class PackageController extends Controller
           $package->total_allowed_jobs = $request->total_allowed_jobs;
           $package->total_allowed_featured_jobs = $request->total_allowed_featured_jobs;
           $package->total_allowed_photos = $request->total_allowed_photos;
-          $package->total_allowed_videos = $request->total_allowed_videos;
-
 
           $package->update();
 
