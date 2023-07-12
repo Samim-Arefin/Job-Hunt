@@ -86,15 +86,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label>Total Allowed Videos *</label>
-                                    <input type="text" class="form-control @error('total_allowed_videos') is-invalid @enderror" name="total_allowed_videos" value="{{ old('total_allowed_videos') }}" placeholder="0">
-                                     @error('total_allowed_videos')
-                                      <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>

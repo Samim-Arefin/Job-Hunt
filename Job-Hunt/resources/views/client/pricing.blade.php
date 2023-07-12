@@ -70,19 +70,6 @@
                                 <span class="fa-li pricing-icon" style="@if($text=='No') color:red; @endif"><i class="{{ $icon_code }}"></i></span>
                                 {{ $text }} Company Photos
                             </li>
-                            <li>
-                                @php
-                                    if($package->total_allowed_videos == 0) {
-                                        $text = "No";
-                                        $icon_code = "fas fa-times";
-                                    } else {
-                                        $text = $package->total_allowed_videos;
-                                        $icon_code = "fas fa-check";
-                                    }
-                                @endphp
-                                <span class="fa-li pricing-icon" style="@if($text=='No') color:red; @endif"><i class="{{ $icon_code }}"></i></span>
-                                {{ $text }} Company Videos
-                            </li>
                         </ul>
                         <div class="buy">
                             <a href ="{{ route('company.buy-package', $package) }}" class="btn btn-primary">Choose Plan</a>

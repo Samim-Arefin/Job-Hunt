@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('country')->nullable();
             $table->string('website')->nullable();
-            $table->string('size')->nullable();
-            $table->string('founded')->nullable();
-            $table->integer('industry_id')->nullable();
+            $table->string('founded_on')->nullable();
+            $table->unsignedBigInteger('company_location_id')->nullable();
+            $table->unsignedBigInteger('company_size_id')->nullable();
+            $table->unsignedBigInteger('company_industry_id')->nullable();
             $table->text('description')->nullable();
             $table->string('mon')->nullable();
             $table->string('tue')->nullable();
@@ -38,6 +39,9 @@ return new class extends Migration
             $table->text('instagram')->nullable();
             $table->tinyInteger('status')->nullable();
             $table->timestamps();
+            $table->foreign('company_location_id')->references('id')->on('company_locations')->onDelete('cascade');
+            $table->foreign('company_size_id')->references('id')->on('company_sizes')->onDelete('cascade');
+            $table->foreign('company_industry_id')->references('id')->on('company_industries')->onDelete('cascade');
         });
     }
 
