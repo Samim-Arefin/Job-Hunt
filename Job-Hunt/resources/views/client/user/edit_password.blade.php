@@ -1,12 +1,12 @@
 @extends('client.layout.app')
-@section('title', 'Company Edit Password')
+@section('title', 'Edit User Password')
 @section('main-section')
     <div class="page-top" style="background-image: url('{{ asset('uploads/banner.jpg') }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="color: aliceblue;">Company Edit Password</h2>
+                    <h2 style="color: aliceblue;">Edit User Password</h2>
                 </div>
             </div>
         </div>
@@ -17,14 +17,14 @@
             <div class="row">
                 <div class="col-lg-3 col-md-12">
                     <div class="card">
-                        @include('client.company.sidebar')
+                        @include('client.user.sidebar')
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-12">
                     <div class="card"
                         style="margin: 10px auto; padding: 40px 30px 20px 30px; background-color: #e9eff3; border-radius: 15px;">
                         <div class="card-body">
-                            <form action="{{ route('company.edit-password-submit') }}" method="post"
+                            <form action="{{ route('user.edit-password-update') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
