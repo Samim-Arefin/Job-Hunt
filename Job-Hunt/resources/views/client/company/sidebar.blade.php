@@ -18,6 +18,12 @@
     <li class="list-group-item nav-item" style="{{ Request::is('company/photos') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ Route('company.photos') }}">Photos</a>
     </li>
+    <li class="list-group-item nav-item" style="{{ Request::is('company/create-job') ? 'background-color: darkcyan;' : '' }}">
+        <a style="color:black" href="{{ Route('company.create-job') }}">Create Job</a>
+    </li>
+    <li class="list-group-item nav-item" style="{{ Request::is('company/jobs') ? 'background-color: darkcyan;' : '' }}">
+        <a style="color:black" href="{{ Route('company.jobs') }}">All Jobs</a>
+    </li>
      <li class="list-group-item nav-item" style="{{ Request::is('company/edit-profile') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ Route('company.edit-profile') }}">Edit Profile</a>
     </li>

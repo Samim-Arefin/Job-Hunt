@@ -14,3 +14,9 @@ Route::post('/edit-password-submit', [CompanyController::class, 'edit_password_s
 Route::get('/photos', [CompanyController::class, 'photos'])->name('company.photos');
 Route::post('/photo-submit', [CompanyController::class, 'photo_submit'])->name('company.photo-submit');
 Route::post('/photo-delete/{id}', [CompanyController::class, 'photo_delete'])->name('company.photo-delete');
+Route::get('/create-job', [CompanyController::class, 'create_job'])->name('company.create-job');
+Route::post('/create-job-submit', [CompanyController::class, 'create_job_submit'])->name('company.create-job-submit');
+Route::get('/jobs', [CompanyController::class, 'jobs'])->name('company.jobs');
+Route::post('/delete-job/{id}', [CompanyController::class, 'delete_job'])->name('company.delete-job');
+Route::get('/edit-job/{id}', [CompanyController::class, 'edit_job'])->name('company.edit-job');
+Route::post('/update-job/{id}', [CompanyController::class, 'update_job'])->name('company.update-job');
