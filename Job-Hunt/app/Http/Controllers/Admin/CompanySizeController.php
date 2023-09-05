@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanySize;
+use App\Models\Company;
 
 class CompanySizeController extends Controller
 {
@@ -58,6 +59,11 @@ class CompanySizeController extends Controller
 
     public function delete($id)
     {
+          $check = Company::where('company_size_id',$id)->count();
+          if($check>0) 
+          {
+            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
           $company_size = CompanySize::find($id);
           $company_size ->delete();
 

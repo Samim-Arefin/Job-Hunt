@@ -76,12 +76,12 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="item">
-                            <h2 class="heading">For Candidates</h2>
+                            <h2 class="heading">For Users</h2>
                             <ul class="useful-links">
-                                <li><a href="">Browser Jobs</a></li>
-                                <li><a href="">Browse Candidates</a></li>
-                                <li><a href="">Candidate Dashboard</a></li>
-                                <li><a href="">Saved Jobs</a></li>
+                                <li><a href="{{ route('job-listing') }}">Browse Jobs</a></li>
+                                <li><a href="{{ route('user.dashboard') }}">User Dashboard</a></li>
+                                <li><a href="{{ route('user.bookmark-view') }}">Bookmarked Jobs</a></li>
+                                <li><a href="{{ route('user.applications') }}">Applied Jobs</a></li>
                             </ul>
                         </div>
                     </div>
@@ -89,10 +89,10 @@
                         <div class="item">
                             <h2 class="heading">For Companies</h2>
                             <ul class="useful-links">
-                                <li><a href="">Post Job</a></li>
-                                <li><a href="">Browse Jobs</a></li>
-                                <li><a href="">Company Dashboard</a></li>
-                                <li><a href="">Applications</a></li>
+                                <li><a href="{{ route('company-listing') }}">Browse Companies</a></li>
+                                <li><a href="{{ route('company.dashboard') }}">Company Dashboard</a></li>
+                                <li><a href="{{ route('company.create-job') }}">Post New Job</a></li>
+                                <li><a href="{{ route('company.applications') }}">User Applications</a></li>
                             </ul>
                         </div>
                     </div>
@@ -157,20 +157,15 @@
                                 To get the latest news from our website, please
                                 subscribe us here:
                             </p>
-                            <form action="" method="post">
+
+                             <form action="{{ route('subscriber_send_email') }}" method="post" class="form_subscribe_ajax">
+                                @csrf
                                 <div class="form-group">
-                                    <input
-                                        type="text"
-                                        name=""
-                                        class="form-control"
-                                    />
+                                    <input type="text" name="email" class="form-control">
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input
-                                        type="submit"
-                                        class="btn btn-primary"
-                                        value="Subscribe Now"
-                                    />
+                                    <input type="submit" class="btn btn-primary" value="Subscribe Now">
                                 </div>
                             </form>
                         </div>
@@ -205,5 +200,49 @@
             <i class="fas fa-angle-up"></i>
         </div>
       @include('client.layout.bottomtoupscript')
+      <script>
+        (function($){
+            $(".form_subscribe_ajax").on('submit', function(e){
+                e.preventDefault();
+                var form = this;
+                $.ajax({
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){
+                        $(form).find('span.error-text').text('');
+                    },
+                    success:function(data)
+                    {
+                        if(data.code == 0)
+                        {
+                            $.each(data.error_message, function(prefix, val) {
+                                $(form).find('span.'+prefix+'_error').text(val[0]);
+                            });
+                        }
+                        else if(data.code == 2)
+                        {
+                            $.each(data.error_message_2, function(prefix, val) {
+                                $('.email_error').text(data.error_message_2);
+                            });
+                        }
+                        else if(data.code == 1)
+                        {
+                            $(form)[0].reset();
+                            iziToast.success({
+                                title: '',
+                                position: 'topRight',
+                                message: data.success_message,
+                            });
+                         }
+        
+                    }
+                });
+            });
+        })(jQuery);
+        </script>
     </body>
 </html>

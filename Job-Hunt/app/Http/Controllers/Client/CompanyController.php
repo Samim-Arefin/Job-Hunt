@@ -18,6 +18,15 @@ use App\Models\JobType;
 use App\Models\JobExperience;
 use App\Models\JobGender;
 use App\Models\JobSalaryRange;
+use App\Models\UserApplication;
+use App\Models\UserEducation;
+use App\Models\UserWorkExperience;
+use App\Models\UserSkill;
+use App\Models\UserAward;
+use App\Models\UserResume;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AuthEmail;
 use Illuminate\Validation\Rule;
 use Auth;
 use Hash;
@@ -447,5 +456,51 @@ class CompanyController extends Controller
         {
             return redirect()->back()->with('error', 'job not found!!');
         }
+    }
+
+     public function applications()
+    {
+        $jobs = Job::with('rJobCategory','rJobLocation','rJobType','rJobGender','rJobExperience','rJobSalaryRange')->where('company_id',Auth::guard('company')->user()->id)->get();
+        return view('client.company.applications', compact('jobs'));
+    }
+
+    public function applicant($id)
+    {
+        $applicants = UserApplication::with('rUser')->where('job_id',$id)->get();
+        $job_single = Job::where('id',$id)->first();
+
+        return view('client.company.applicants', compact('applicants','job_single'));
+    }
+
+    public function applicant_resume($id)
+    {
+        $candidate_single = User::where('id',$id)->first();
+        $candidate_educations = UserEducation::where('user_id',$id)->get();
+        $candidate_experiences = UserWorkExperience::where('user_id',$id)->get();
+        $candidate_skills = UserSkill::where('user_id',$id)->get();
+        $candidate_awards = UserAward::where('user_id',$id)->get();
+        $candidate_resumes = UserResume::where('user_id',$id)->get();
+
+        return view('client.company.applicant_resume', compact('candidate_single','candidate_educations','candidate_experiences','candidate_skills','candidate_awards','candidate_resumes'));
+    }
+
+    public function application_status_change(Request $request)
+    {
+        $obj = UserApplication::with('rUser')->where('user_id',$request->user_id)->where('job_id',$request->job_id)->first();
+        $obj->status = $request->status;
+        $obj->update();
+
+        $user_email = $obj->rUser->email;
+
+        if($request->status == 'Approved') {
+            $detail_link = route('user.applications');
+            $subject = 'Congratulation! Your application has approved';
+            $message = 'Please check for details: <br>';
+            $message .= '<a href="'.$detail_link.'">Click here to see the details</a>';
+
+           Mail::to($user_email)->send(new AuthEmail($subject, $message));
+        }
+
+        return redirect()->back()->with('success', 'Status is changed successfully!');
     }
 }

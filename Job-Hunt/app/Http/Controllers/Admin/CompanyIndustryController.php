@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanyIndustry;
+use App\Models\Company;
 
 class CompanyIndustryController extends Controller
 {
@@ -58,6 +59,11 @@ class CompanyIndustryController extends Controller
 
     public function delete($id)
     {
+          $check = Company::where('company_industry_id',$id)->count();
+          if($check>0) 
+          {
+             return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
           $company_industry = CompanyIndustry::find($id);
           $company_industry ->delete();
 

@@ -15,14 +15,15 @@
                   </p>
                </div>
                <div class="search-section">
-                  <form action="#" method="post">
+                  <form action="{{ route('job-listing') }}" method="get">
+                     @csrf
                      <div class="inner">
                         <div class="row">
                            <div class="col-lg-3">
                               <div class="form-group">
                                  <input
                                     type="text"
-                                    name=""
+                                    name="title"
                                     class="form-control"
                                     placeholder="{{ $page_home_data->job_title }}"
                                     />
@@ -30,10 +31,7 @@
                            </div>
                            <div class="col-lg-3">
                               <div class="form-group">
-                                 <select
-                                    name=""
-                                    class="form-select select2"
-                                    >
+                                 <select name="location" class="form-select select2">
                                     <option value="">
                                        {{ $page_home_data->job_location }}
                                     </option>
@@ -45,12 +43,8 @@
                            </div>
                            <div class="col-lg-3">
                               <div class="form-group">
-                                 <select
-                                    name=""
-                                    class="form-select select2"
-                                    >
-                                    <option value="">
-                                       {{ $page_home_data->job_category }}
+                                 <select name="category" class="form-select select2">
+                                    <option value=""> {{ $page_home_data->job_category }}
                                     </option>
                                     @foreach ($job_categories as $job_category)
                                         <option value="{{ $job_category->id }}">{{ $job_category->name }}</option>
@@ -100,8 +94,8 @@
                   <i class="{{ $category->icon }}"></i>
                </div>
                <h3>{{ $category->name }}</h3>
-               <p>(5 Open Positions)</p>
-               <a href=""></a>
+               <p>({{ $category->r_job_count }} Open Positions)</p>
+               <a href="{{ url('job-listing?category='.$category->id) }}"></a>
             </div>
          </div>
          @endif
@@ -169,237 +163,89 @@
          </div>
       </div>
       <div class="row">
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo1.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#"
-                        >Software Engineer, Google</a
-                        >
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Web Development</div>
-                     <div class="location">United States</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">3 days ago</div>
-                     <div class="budget">$300-$600</div>
-                     <div class="expired">Expired</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Full Time</div>
-                     <div class="urgent">Urgent</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark active"></i
-                        ></a>
-                  </div>
-               </div>
+            @php $i=0; @endphp 
+            @foreach($featured_jobs as $item)
+            @php
+            $this_company_id = $item->rCompany->id;
+            $order_data = \App\Models\Order::where('company_id',$this_company_id)->where('currently_active',1)->first();
+            if(date('Y-m-d') > $order_data->ending_date) {
+                continue;
+            }
+            $i++;
+            if($i>6) {
+                break;
+            }
+            @endphp
+            
+            <div class="col-lg-6 col-md-12">
+                <div class="item d-flex justify-content-start">
+                    <div class="logo">
+                        <img src="{{ asset('uploads/'.$item->rCompany->logo) }}" alt="">
+                    </div>
+                    <div class="text">
+                        <h3><a href="{{ route('job',$item->id) }}">{{ $item->title }}, {{ $item->rCompany->name }}</a></h3>
+                        <div class="detail-1 d-flex justify-content-start">
+                            <div class="category">
+                                {{ $item->rJobCategory->name }}
+                            </div>
+                            <div class="location">
+                                {{ $item->rJobLocation->name }}
+                            </div>
+                        </div>
+                        <div class="detail-2 d-flex justify-content-start">
+                            <div class="date">
+                                {{ $item->created_at->diffForHumans() }}
+                            </div>
+                            <div class="budget">
+                                {{ $item->rJobSalaryRange->name }}
+                            </div>
+                            @if(date('Y-m-d') > $item->deadline)
+                            <div class="expired">
+                                Expired
+                            </div>
+                            @endif
+                        </div>
+                        <div class="special d-flex justify-content-start">
+                            @if($item->is_featured == 1)
+                            <div class="featured">
+                                Featured
+                            </div>
+                            @endif
+                            <div class="type">
+                                {{ $item->rJobType->name }}
+                            </div>
+                            @if($item->is_urgent == 1)
+                            <div class="urgent">
+                                Urgent
+                            </div>
+                            @endif
+                        </div>
+                        @if(!Auth::guard('company')->check())
+                        <div class="bookmark">
+                            @if(Auth::guard('user')->check())
+                                @php
+                                $count = \App\Models\UserBookmark::where('user_id',Auth::guard('user')->user()->id)->where('job_id',$item->id)->count();
+                                if($count>0) {
+                                    $bookmark_status = 'active';
+                                } else {
+                                    $bookmark_status = '';
+                                }
+                                @endphp
+                            @else
+                                @php $bookmark_status = ''; @endphp
+                            @endif
+                            <a href="{{ route('user.bookmark',$item->id) }}"><i class="fas fa-bookmark {{ $bookmark_status }}"></i></a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
             </div>
-         </div>
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo2.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#">Web Designer, Amplify</a>
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Web Development</div>
-                     <div class="location">United States</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">1 day ago</div>
-                     <div class="budget">$1000</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Part Time</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark"></i
-                        ></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo3.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#"
-                        >Laravel Developer, Gimpo</a
-                        >
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Web Development</div>
-                     <div class="location">Canada</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">2 days ago</div>
-                     <div class="budget">$1000-$3000</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Full Time</div>
-                     <div class="urgent">Urgent</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark"></i
-                        ></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo4.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#"
-                        >PHP Developer, Kite Solution</a
-                        >
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Web Development</div>
-                     <div class="location">Australia</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">7 hours ago</div>
-                     <div class="budget">$1800</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Full Time</div>
-                     <div class="urgent">Urgent</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark"></i
-                        ></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo5.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#"
-                        >Junior Accountant, ABC Media</a
-                        >
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Marketing</div>
-                     <div class="location">Canada</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">2 hours ago</div>
-                     <div class="budget">$400</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Part Time</div>
-                     <div class="urgent">Urgent</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark"></i
-                        ></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6 col-md-12">
-            <div class="item d-flex justify-content-start">
-               <div class="logo">
-                  <img src="{{ asset('uploads/logo6.png') }}" alt="" />
-               </div>
-               <div class="text">
-                  <h3>
-                     <a href="#"
-                        >Sales Manager, Tingshu Limited</a
-                        >
-                  </h3>
-                  <div
-                     class="detail-1 d-flex justify-content-start"
-                     >
-                     <div class="category">Marketing</div>
-                     <div class="location">Canada</div>
-                  </div>
-                  <div
-                     class="detail-2 d-flex justify-content-start"
-                     >
-                     <div class="date">9 hours ago</div>
-                     <div class="budget">$600-$800</div>
-                  </div>
-                  <div
-                     class="special d-flex justify-content-start"
-                     >
-                     <div class="featured">Featured</div>
-                     <div class="type">Full Time</div>
-                     <div class="urgent">Urgent</div>
-                  </div>
-                  <div class="bookmark">
-                     <a href=""
-                        ><i class="fas fa-bookmark"></i
-                        ></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+            @endforeach
+        </div>
       <div class="row">
          <div class="col-md-12">
             <div class="all">
-               <a href="#" class="btn btn-primary"
+               <a href="{{ route('job-listing') }}" class="btn btn-primary"
                   >See All Jobs</a
                   >
             </div>
@@ -438,6 +284,27 @@
       </div>
    </div>
 </div>
+@endif
+
+@if(session()->get('success'))
+    <script>
+        iziToast.success({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('success') }}',
+            backgroundColor: 'green',
+        });
+    </script>
+@endif
+
+@if(session()->get('error'))
+    <script>
+        iziToast.error({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('error') }}',
+        });
+    </script>
 @endif
 
 @endsection

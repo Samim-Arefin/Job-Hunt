@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobExperience;
+use App\Models\Job;
 
 class JobExperienceController extends Controller
 {
@@ -58,6 +59,11 @@ class JobExperienceController extends Controller
 
     public function delete($id)
     {
+          $check = Job::where('job_experience_id',$id)->count();
+          if($check>0) 
+          {
+            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
           $job_experience = JobExperience::find($id);
           $job_experience ->delete();
 

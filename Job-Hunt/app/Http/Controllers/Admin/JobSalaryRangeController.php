@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobSalaryRange;
+use App\Models\Job;
 
 class JobSalaryRangeController extends Controller
 {
@@ -58,6 +59,11 @@ class JobSalaryRangeController extends Controller
 
     public function delete($id)
     {
+          $check = Job::where('job_salary_range_id',$id)->count();
+          if($check>0) 
+          {
+            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
           $job_salary_range = JobSalaryRange::find($id);
           $job_salary_range ->delete();
 
