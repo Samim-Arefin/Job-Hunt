@@ -24,6 +24,9 @@
     <li class="list-group-item nav-item" style="{{ Request::is('company/jobs') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ Route('company.jobs') }}">All Jobs</a>
     </li>
+    <li class="list-group-item nav-item" style="{{ Request::is('company/applications') ? 'background-color: darkcyan;' : '' }}">
+        <a style="color:black" href="{{ Route('company.applications') }}">Candidate Applications</a>
+    </li>
      <li class="list-group-item nav-item" style="{{ Request::is('company/edit-profile') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ Route('company.edit-profile') }}">Edit Profile</a>
     </li>

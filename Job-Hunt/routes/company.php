@@ -20,3 +20,7 @@ Route::get('/jobs', [CompanyController::class, 'jobs'])->name('company.jobs');
 Route::post('/delete-job/{id}', [CompanyController::class, 'delete_job'])->name('company.delete-job');
 Route::get('/edit-job/{id}', [CompanyController::class, 'edit_job'])->name('company.edit-job');
 Route::post('/update-job/{id}', [CompanyController::class, 'update_job'])->name('company.update-job');
+Route::get('/applications', [CompanyController::class, 'applications'])->name('company.applications');
+Route::get('/applicant/{id}', [CompanyController::class, 'applicant'])->name('company.applicant');
+Route::get('/applicant-resume/{id}', [CompanyController::class, 'applicant_resume'])->name('company.applicant-resume');
+Route::post('/application-status-change', [CompanyController::class, 'application_status_change'])->name('company.application-status-change');

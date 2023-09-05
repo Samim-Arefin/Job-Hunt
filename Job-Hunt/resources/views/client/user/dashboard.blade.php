@@ -28,20 +28,20 @@
                     <div class="row box-items">
                         <div class="col-md-4">
                             <div class="box1">
-                                <h4>12</h4>
-                                <p>Open Jobs</p>
+                                <h4>{{ $total_applied_jobs }}</h4>
+                                <p>Applied Jobs</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="box2">
-                                <h4>3</h4>
-                                <p>Pending Jobs</p>
+                                <h4>{{ $total_rejected_jobs }}</h4>
+                                <p>Rejected Jobs</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="box3">
-                                <h4>5</h4>
-                                <p>Featured Jobs</p>
+                                <h4>{{ $total_approved_jobs }}</h4>
+                                <p>Accepted Jobs</p>
                             </div>
                         </div>
                     </div>

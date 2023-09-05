@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobGender;
+use App\Models\Job;
 
 class JobGenderController extends Controller
 {
@@ -58,6 +59,12 @@ class JobGenderController extends Controller
 
     public function delete($id)
     {
+          $check = Job::where('job_gender_id',$id)->count();
+          if($check>0) 
+          {
+            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
+
           $job_gender = JobGender::find($id);
           $job_gender ->delete();
 

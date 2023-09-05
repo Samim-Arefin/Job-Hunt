@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobCategory;
+use App\Models\Job;
 
 class JobCategoryController extends Controller
 {
@@ -63,6 +64,11 @@ class JobCategoryController extends Controller
 
     public function delete($id)
     {
+          $check = Job::where('job_category_id',$id)->count();
+          if($check>0) 
+          {
+            return redirect()->back()->with('error', 'You can not delete this item, because this is used in another place.');
+          }
           $job_category  = JobCategory::find($id);
           $job_category ->delete();
 

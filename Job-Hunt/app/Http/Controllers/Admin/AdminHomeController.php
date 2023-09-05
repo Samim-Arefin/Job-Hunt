@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\PageHomeItem;
+use App\Models\Subscriber;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AuthEmail;
 use Hash;
 use Auth;
 
@@ -153,6 +156,43 @@ class AdminHomeController extends Controller
         $page_home_data->update();
 
         return redirect()->back()->with('success', 'Data updated successfully!!');
+    }
+
+    public function all_subscribers()
+    {
+        $subscribers = Subscriber::where('status',1)->get();
+        return view('admin.subscriber.index', compact('subscribers'));
+    }
+
+    public function send_email()
+    {
+        return view('admin.subscriber.send_email');
+    }
+
+    public function send_email_submit(Request $request) 
+    {
+        $request->validate([
+            'subject' => 'required',
+            'comment' => 'required'
+        ]);
+
+        $subject = $request->subject;
+        $message = $request->comment;
+
+        $all_subs = Subscriber::where('status',1)->get();
+        foreach($all_subs as $item)
+        {
+            Mail::to($item->email)->send(new AuthEmail($subject,$message));
+        }        
+
+        return redirect()->route('admin.all-subscribers')->with('success','Email is sent to all subscribers');
+
+    }
+
+    public function delete($id)
+    {
+        Subscriber::where('id',$id)->delete();
+        return redirect()->back()->with('success', 'Data is deleted successfully.');
     }
     
 }

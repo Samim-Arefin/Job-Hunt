@@ -12,6 +12,12 @@
     <li class="list-group-item nav-item" style="{{ Request::is('user/dashboard') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ Route('user.dashboard') }}">Dashboard</a>
     </li>
+    <li class="list-group-item nav-item" style="{{ Request::is('user/applications') ? 'background-color: darkcyan;' : '' }}">
+        <a style="color:black" href="{{ Route('user.applications') }}">Applied Jobs</a>
+    </li>
+    <li class="list-group-item nav-item" style="{{ Request::is('user/bookmark-view') ? 'background-color: darkcyan;' : '' }}">
+        <a style="color:black" href="{{ Route('user.bookmark-view') }}">Bookmarks</a>
+    </li>
     <li class="list-group-item nav-item" style ="{{ Request::is('user/education/view') ||  Request::is('user/education/create') || Request::is('user/education/edit/*') ? 'background-color: darkcyan;' : '' }}">
         <a style="color:black" href="{{ route('user.education') }}">Educations</a>
     </li>

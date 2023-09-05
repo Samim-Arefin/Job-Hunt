@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Models\UserBookmark;
+use App\Models\UserApplication;
 use Auth;
 use Hash;
 
@@ -13,7 +15,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('client.user.dashboard');
+        $total_applied_jobs=0;
+        $total_rejected_jobs=0;
+        $total_approved_jobs=0;
+
+        $total_applied_jobs = UserApplication::where('user_id',Auth::guard('user')->user()->id)->where('status','Applied')->count();
+
+        $total_rejected_jobs = UserApplication::where('user_id',Auth::guard('user')->user()->id)->where('status','Rejected')->count();
+
+        $total_approved_jobs = UserApplication::where('user_id',Auth::guard('user')->user()->id)->where('status','Approved')->count();
+
+        return view('client.user.dashboard',compact('total_applied_jobs','total_rejected_jobs','total_approved_jobs'));
     }
 
     public function edit_profile()

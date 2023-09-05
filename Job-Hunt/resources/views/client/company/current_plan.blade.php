@@ -43,10 +43,28 @@
                             Expire in {{ $remainingDays }} days
                             </p>
                             <div class="d-flex justify-content-end">
-                                 <form action="{{ route('company.cancel-plan', Auth::guard('company')->user()->id) }}" method="POST">
-                                    @csrf
-                                    <button onclick="return confirm('Are you sure?');" type="submit" class="btn btn-danger btn-sm">Cancel Plan</button>
-                                </form>
+                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">Delete</button>
+                            </div>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete {{ $current_plan->rPackage->name }} ?
+                                        </div>
+                                        <div class="d-flex justify-content-end align-items-center gap-2 px-3 pb-3">
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Close</button>
+                                            <div>
+                                                <form action="{{ route('company.cancel-plan', Auth::guard('company')->user()->id) }}" method="POST">
+                                                @csrf
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                             </div>
                             @endif
                         </div>

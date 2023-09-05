@@ -7,7 +7,8 @@ use App\Http\Controllers\Client\UserSkillController;
 use App\Http\Controllers\Client\UserAwardController;
 use App\Http\Controllers\Client\UserWorkExperienceController;
 use App\Http\Controllers\Client\UserResumeController;
-
+use App\Http\Controllers\Client\BookMarkController;
+use App\Http\Controllers\Client\ApplicationController;
 
 Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
 Route::get('/edit-profile', [UserController::class, 'edit_profile'])->name('user.edit-profile');
@@ -49,3 +50,11 @@ Route::post('/resume/store', [UserResumeController::class, 'store'])->name('user
 Route::get('/resume/edit/{id}', [UserResumeController::class, 'edit'])->name('user.resume-edit');
 Route::post('/resume/update/{id}', [UserResumeController::class, 'update'])->name('user.resume-update');
 Route::post('/resume/delete/{id}', [UserResumeController::class, 'delete'])->name('user.resume-delete');
+
+Route::get('/bookmark/{id}', [BookMarkController::class, 'bookmark'])->name('user.bookmark');
+Route::get('/bookmark-view', [BookMarkController::class, 'bookmark_view'])->name('user.bookmark-view');
+Route::post('/bookmark-delete/{id}', [BookMarkController::class, 'bookmark_delete'])->name('user.bookmark-delete');
+
+Route::get('/apply/{id}', [ApplicationController::class, 'apply'])->name('user.apply');
+Route::post('/apply-submit/{id}', [ApplicationController::class, 'apply_submit'])->name('user.apply-submit');
+Route::get('/applications', [ApplicationController::class, 'applications'])->name('user.applications');

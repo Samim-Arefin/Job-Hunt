@@ -35,6 +35,19 @@
                     <li class="{{ Request::is('admin/company-size/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.company-size') }}"><i class="fas fa-angle-right"></i>Company Size</a></li>
                 </ul>
             </li>
+            
+
+            <li class="{{ Request::is('admin/companies')||Request::is('admin/companies-details/*')||Request::is('admin/companies-jobs/*')||Request::is('admin/companies-applicants/*')||Request::is('admin/companies-applicant-resume/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.companies') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Company Profile"><i class="fas fa-hand-point-right"></i> <span>Company Profile</span></a></li>
+
+            <li class="{{ Request::is('admin/user')||Request::is('admin/user-details/*')||Request::is('admin/user-applied-jobs/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.users') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="User Profile"><i class="fas fa-hand-point-right"></i> <span>User Profile</span></a></li>
+
+            <li class="nav-item dropdown {{ Request::is('admin/all-subscribers')||Request::is('admin/subscribers-send-email') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Subscriber Section</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/all-subscribers') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.all-subscribers') }}"><i class="fas fa-angle-right"></i> All Subscribers</a></li>
+                    <li class="{{ Request::is('admin/subscribers-send-email') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.subscribers-send-email') }}"><i class="fas fa-angle-right"></i> Send Email to Subscribers</a></li>
+                </ul>
+            </li>
 
             <li class="{{ Request::is('admin/why-choose-us/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.why-choose-us') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Why Choose Us"><i class="fas fa-hand-point-right"></i> <span>Why Choose Us</span></a></li>
             <li class="{{ Request::is('admin/testimonial/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.testimonial') }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Testimonial"><i class="fas fa-hand-point-right"></i> <span>Testimonial</span></a></li>
